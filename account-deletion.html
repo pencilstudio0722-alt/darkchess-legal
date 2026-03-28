@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帳戶刪除請求 — 暗黑戰棋</title>
+<style>
+  :root {
+    --bg: #0a0618;
+    --card: #14102a;
+    --border: #3a2855;
+    --accent: #ff3333;
+    --accent-glow: rgba(255, 51, 51, 0.3);
+    --gold: #ffcc00;
+    --text: #e0e0e0;
+    --muted: #888;
+    --link: #44ccff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 24px 16px;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 26px;
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent-glow);
+    margin-bottom: 8px;
+  }
+  .app-name {
+    font-size: 16px;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    font-size: 17px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section p, .section li {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 6px;
+  }
+  .section ul {
+    padding-left: 20px;
+  }
+  .section li {
+    margin-bottom: 10px;
+  }
+  .highlight {
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .keep {
+    color: #44cc44;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-delete { background: #3a1818; color: #ff8888; border: 1px solid #662222; }
+  .tag-retain { background: #183a18; color: #88ff88; border: 1px solid #226622; }
+
+  /* Steps */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    padding-left: 36px;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Data table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .data-table th, .data-table td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a1435;
+  }
+  .data-table th {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .data-table td:nth-child(2) { color: #ff8888; }
+  .data-table td:nth-child(3) { color: #88ff88; }
+
+  /* Contact */
+  .contact-box {
+    background: #1a1435;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .contact-box a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .contact-box a:hover { text-decoration: underline; }
+  .contact-box .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid #1a1435;
+  }
+  .warn-box {
+    background: #2a1a0a;
+    border: 1px solid #664422;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #ffaa66;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🗑️ 帳戶刪除請求</h1>
+  <div class="app-name">⚔️ 暗黑戰棋 · Account Deletion Request</div>
+
+  <!-- ===== 如何刪除帳戶 ===== -->
+  <div class="section">
+    <h2>📋 如何刪除帳戶</h2>
+    <p style="margin-bottom:14px">請依照以下步驟提交帳戶刪除請求：</p>
+    <ol class="steps">
+      <li>發送電子郵件至下方聯繫信箱，標題請寫：<br>
+        <strong style="color:var(--gold)">「帳戶刪除請求 — 暗黑戰棋」</strong></li>
+      <li>郵件中請提供您的 <strong style="color:var(--gold)">Firebase UID</strong> 或登入帳號的電子郵件地址，以便我們核實身份。<br>
+        <span style="font-size:12px;color:var(--muted)">（可在遊戲 → 設定 → 帳號資訊中查看您的 UID）</span></li>
+      <li>我們將在收到請求後 <strong style="color:var(--gold)">30 個工作天</strong> 內完成刪除，並以電子郵件通知您。</li>
+    </ol>
+  </div>
+
+  <!-- ===== 聯繫方式 ===== -->
+  <div class="section">
+    <h2>📬 聯繫方式</h2>
+    <div class="contact-box">
+      <p style="font-size:13px;color:#aaa;margin-bottom:8px">請將刪除請求發送至：</p>
+      <a href="mailto:pencilstudio0722@gmail.com?subject=%E5%B8%B3%E6%88%B6%E5%88%AA%E9%99%A4%E8%AB%8B%E6%B1%82%20%E2%80%94%20%E6%9A%97%E9%BB%91%E6%88%B0%E6%A3%8B">
+        pencilstudio0722@gmail.com
+      </a>
+      <div class="note">我們會在 30 個工作天內處理您的請求</div>
+    </div>
+  </div>
+
+  <!-- ===== 刪除與保留的資料類型 ===== -->
+  <div class="section">
+    <h2>📊 資料刪除與保留說明</h2>
+    <p style="margin-bottom:10px;font-size:13px">提交刪除請求後，以下資料將被處理：</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>資料類型</th>
+          <th>刪除</th>
+          <th>保留</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>玩家遊戲進度（關卡、角色、裝備）</td>
+          <td>✅ 永久刪除</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Firebase 帳戶（含 UID 與登入憑證）</td>
+          <td>✅ 永久刪除</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>雲端存檔（Firestore）</td>
+          <td>✅ 永久刪除</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>遊戲內購買記錄</td>
+          <td></td>
+          <td>🔒 保留最多 3 年 <span class="tag tag-retain">法規要求</span></td>
+        </tr>
+        <tr>
+          <td>訂閱與退款相關記錄</td>
+          <td></td>
+          <td>🔒 保留最多 3 年 <span class="tag tag-retain">法規要求</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      ⚠️ <strong>重要提醒：</strong><br>
+      • 帳戶一旦刪除，所有遊戲進度將 <strong>無法恢復</strong>。<br>
+      • 本地儲存的資料（localStorage）需由您在裝置上自行清除。<br>
+      • 購買記錄因稅務及法律合規要求，將依法保留最多 3 年，之後自動刪除。
+    </div>
+  </div>
+
+  <!-- ===== 保留期限 ===== -->
+  <div class="section">
+    <h2>⏱️ 處理時程</h2>
+    <ul>
+      <li><strong style="color:var(--gold)">請求審核：</strong>收到郵件後 3–5 個工作天內確認身份</li>
+      <li><strong style="color:var(--gold)">資料刪除：</strong>確認後 30 個工作天內完成刪除</li>
+      <li><strong style="color:var(--gold)">完成通知：</strong>刪除完成後以電子郵件通知您</li>
+      <li><strong style="color:var(--gold)">法定保留資料：</strong>購買記錄依法保留最多 3 年，屆滿後自動刪除</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    ⚔️ 暗黑戰棋 &copy; 2026 Yeung Siu Hin &nbsp;|&nbsp; 最後更新：2026-03-28
+  </div>
+
+</div>
+</body>
+</html>
